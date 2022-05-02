@@ -1,0 +1,19 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-card {
+  margin: 10px;
+}
+
+.image-card img,
+.image-card canvas {
+  max-width: 400px;
+  max-height: 400px;
+}
