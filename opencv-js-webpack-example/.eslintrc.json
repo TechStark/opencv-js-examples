@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "eslint-config-standard"
+  ],
+  "rules": {
+    "semi": [
+      "always"
+    ]
+  }
+}
