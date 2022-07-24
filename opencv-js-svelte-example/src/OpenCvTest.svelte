@@ -1,10 +1,11 @@
 <script lang="ts">
-  import * as CV from "@techstark/opencv-js";
+  import cv from "@techstark/opencv-js";
 
   let buildInfo: string = "";
 
   window.setTimeout(() => {
-    buildInfo = CV.getBuildInformation();
+    (window as any).cv = cv;
+    buildInfo = cv.getBuildInformation();
   }, 1000);
 </script>
 
