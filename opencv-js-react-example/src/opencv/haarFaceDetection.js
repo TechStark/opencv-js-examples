@@ -1,4 +1,4 @@
-import { getOpenCv } from "./loader";
+import cv from "@techstark/opencv-js";
 import { loadDataFile } from "./cvDataFile";
 
 export async function loadHaarFaceModels() {
@@ -21,8 +21,7 @@ export async function loadHaarFaceModels() {
  * @param {cv.Mat} img Input image
  * @returns a new image with detected faces drawn on it.
  */
-export async function detectHaarFace(img) {
-  const cv = await getOpenCv();
+export function detectHaarFace(img) {
   const newImg = img.clone();
 
   const gray = new cv.Mat();

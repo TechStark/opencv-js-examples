@@ -1,7 +1,9 @@
 import React from "react";
-import { getOpenCv } from "./loader";
+import cv from "@techstark/opencv-js";
 import { loadHaarFaceModels, detectHaarFace } from "./haarFaceDetection";
 import "./style.css";
+
+window.cv = cv;
 
 class TestPage extends React.Component {
   constructor(props) {
@@ -24,8 +26,7 @@ class TestPage extends React.Component {
   // process image with opencv.js
   //
   /////////////////////////////////////////
-  async processImage(imgSrc) {
-    const cv = await getOpenCv();
+  processImage(imgSrc) {
     const img = cv.imread(imgSrc);
 
     // to gray scale
@@ -39,7 +40,7 @@ class TestPage extends React.Component {
     cv.imshow(this.cannyEdgeRef.current, edges);
 
     // detect faces using Haar-cascade Detection
-    const haarFaces = await detectHaarFace(img);
+    const haarFaces = detectHaarFace(img);
     cv.imshow(this.haarFaceImgRef.current, haarFaces);
 
     // need to release them manually
