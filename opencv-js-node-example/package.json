@@ -2,7 +2,7 @@
   "name": "opencv-js-node-example",
   "scripts": {
     "basic": "node src/basic/index.js",
-    "start": "node src/index.js",
+    "commonjs": "node src/commonjs/index.js",
     "esm": "node src/esm/index.mjs"
   },
   "dependencies": {
