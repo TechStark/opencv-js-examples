@@ -1,9 +1,9 @@
 {
   "name": "opencv-js-node-example",
-  "packageManager": "yarn@4.3.1",
   "scripts": {
     "basic": "node src/basic/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "esm": "node src/esm/index.mjs"
   },
   "dependencies": {
     "@techstark/opencv-js": "^4.10.0-release.1"
