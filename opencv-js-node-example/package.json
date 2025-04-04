@@ -6,6 +6,7 @@
     "esm": "node src/esm/index.mjs"
   },
   "dependencies": {
-    "@techstark/opencv-js": "^4.10.0-release.1"
+    "@techstark/opencv-js": "^4.10.0-release.1",
+    "jimp": "^1.6.0"
   }
 }

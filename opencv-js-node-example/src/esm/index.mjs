@@ -1,8 +1,31 @@
+import path from "node:path";
+import { Jimp } from "jimp";
 import { getOpenCv } from "./opencv.mjs";
 
 async function main() {
   const { cv } = await getOpenCv();
   console.log(cv.getBuildInformation());
+
+  // convert Lenna.png to gray image
+  const jimpSrc = await Jimp.read("Lenna.png");
+  const img = cv.matFromImageData(jimpSrc.bitmap);
+  const gray = new cv.Mat();
+  cv.cvtColor(img, gray, cv.COLOR_RGBA2GRAY);
+
+  // save the gray image to disk
+  const grayJimp = new Jimp({
+    width: gray.cols,
+    height: gray.rows,
+    color: 0x00000000,
+  });
+  grayJimp.bitmap.data.set(gray.data);
+  await grayJimp.write("output.png");
+  console.log(`Saved gray image to output.png`);
+
+  // release memory
+  img.delete();
+  gray.delete();
+  console.log("Memory released");
 }
 
 main();

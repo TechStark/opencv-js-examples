@@ -1,6 +1,9 @@
 # opencv-js-node-example
 
-- npm install
-- npm run basic
-- npm run commonjs
-- npm run esm
+```sh
+npm install
+
+npm run basic
+npm run commonjs
+npm run esm
+```
