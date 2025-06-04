@@ -6,7 +6,7 @@ import "./style.css";
 class TestPage extends React.Component {
   constructor(props) {
     super(props);
-    this.inputImgRef = React.createRef();
+    // this.inputImgRef = React.createRef();
     this.grayImgRef = React.createRef();
     this.cannyEdgeRef = React.createRef();
     this.haarFaceImgRef = React.createRef();
