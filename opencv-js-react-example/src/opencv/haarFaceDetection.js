@@ -1,8 +1,12 @@
-import cv from "@techstark/opencv-js";
 import { loadDataFile } from "./cvDataFile";
 
+let haarFaceModelsLoaded = false;
 export async function loadHaarFaceModels() {
+  if (haarFaceModelsLoaded) {
+    return;
+  }
   try {
+    haarFaceModelsLoaded = true;
     console.log("=======start downloading Haar-cascade models=======");
     await loadDataFile(
       "haarcascade_frontalface_default.xml",
@@ -21,7 +25,7 @@ export async function loadHaarFaceModels() {
  * @param {cv.Mat} img Input image
  * @returns a new image with detected faces drawn on it.
  */
-export function detectHaarFace(img) {
+export function detectHaarFace(cv, img) {
   const newImg = img.clone();
 
   const gray = new cv.Mat();
