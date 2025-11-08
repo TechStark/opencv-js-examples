@@ -1,7 +1,7 @@
 import { getOpenCv } from "./opencv";
 
 export async function loadDataFile(fileName, url) {
-  const cv = await getOpenCv();
+  const { cv } = await getOpenCv();
   // see https://docs.opencv.org/master/utils.js
   const response = await fetch(url);
   const buffer = await response.arrayBuffer();

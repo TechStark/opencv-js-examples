@@ -10,7 +10,7 @@ export async function getOpenCv() {
     });
     cv = cvModule;
   }
-  return cv;
+  return { cv };
 }
 
 export function translateException(cv, err) {

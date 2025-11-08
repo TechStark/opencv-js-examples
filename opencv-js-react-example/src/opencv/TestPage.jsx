@@ -25,7 +25,7 @@ class TestPage extends React.Component {
   //
   /////////////////////////////////////////
   async processImage(imgSrc) {
-    const cv = await getOpenCv();
+    const { cv } = await getOpenCv();
     const img = cv.imread(imgSrc);
 
     // to gray scale
