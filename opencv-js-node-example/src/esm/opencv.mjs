@@ -5,10 +5,15 @@ export async function getOpenCv() {
   if (cvModule instanceof Promise) {
     cv = await cvModule;
   } else {
-    await new Promise((resolve) => {
-      cvModule.onRuntimeInitialized = () => resolve();
-    });
-    cv = cvModule;
+    if (cvModule.Mat) {
+      // already initialized
+      cv = cvModule;
+    } else {
+      await new Promise((resolve) => {
+        cvModule.onRuntimeInitialized = () => resolve();
+      });
+      cv = cvModule;
+    }
   }
   return { cv };
 }
