@@ -3,6 +3,7 @@ import { getOpenCv } from "./opencv.mjs";
 
 async function main() {
   const { cv } = await getOpenCv();
+  console.log("OpenCV.js is ready!");
   console.log(cv.getBuildInformation());
 
   // convert Lenna.png to gray image

@@ -1,22 +1,16 @@
-async function loadOpenCv_4_10() {
-  const cv = require("@techstark/opencv-js");
-  return new Promise((resolve) => {
-    cv.onRuntimeInitialized = () => {
-      console.log("OpenCV.js is ready!");
-      resolve({ cv });
-    };
-  });
-}
-
-async function loadOpenCv_4_11() {
-  const cv = await require("@techstark/opencv-js");
-  console.log("OpenCV.js is ready!");
-  return { cv };
-}
+const cvModule = require("@techstark/opencv-js");
 
 async function getOpenCv() {
-  return loadOpenCv_4_10();
-  // return loadOpenCv_4_11();
+  let cv;
+  if (cvModule instanceof Promise) {
+    cv = await cvModule;
+  } else {
+    await new Promise((resolve) => {
+      cvModule.onRuntimeInitialized = () => resolve();
+    });
+    cv = cvModule;
+  }
+  return { cv };
 }
 
 exports.getOpenCv = getOpenCv;
