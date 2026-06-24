@@ -1,29 +1,23 @@
 import React from "react";
 import { getOpenCv } from "./opencv";
-import { loadHaarFaceModels, detectHaarFace } from "./haarFaceDetection";
+import { loadFaceModels, detectFace } from "./faceDetection";
 import "./style.css";
 
 class TestPage extends React.Component {
   constructor(props) {
     super(props);
-    // this.inputImgRef = React.createRef();
     this.grayImgRef = React.createRef();
     this.cannyEdgeRef = React.createRef();
-    this.haarFaceImgRef = React.createRef();
+    this.faceImgRef = React.createRef();
     this.state = {
       imgUrl: null,
     };
   }
 
   componentDidMount() {
-    loadHaarFaceModels();
+    loadFaceModels();
   }
 
-  /////////////////////////////////////////
-  //
-  // process image with opencv.js
-  //
-  /////////////////////////////////////////
   async processImage(imgSrc) {
     const { cv } = await getOpenCv();
     const img = cv.imread(imgSrc);
@@ -38,15 +32,14 @@ class TestPage extends React.Component {
     cv.Canny(imgGray, edges, 100, 100);
     cv.imshow(this.cannyEdgeRef.current, edges);
 
-    // detect faces using Haar-cascade Detection
-    const haarFaces = detectHaarFace(cv, img);
-    cv.imshow(this.haarFaceImgRef.current, haarFaces);
+    // detect faces using YuNet (FaceDetectorYN)
+    const faceResult = detectFace(cv, img);
+    cv.imshow(this.faceImgRef.current, faceResult);
 
-    // need to release them manually
     img.delete();
     imgGray.delete();
     edges.delete();
-    haarFaces.delete();
+    faceResult.delete();
   }
 
   render() {
@@ -94,9 +87,9 @@ class TestPage extends React.Component {
 
             <div className="image-card">
               <div style={{ margin: "10px" }}>
-                ↓↓↓ Haar-cascade Face Detection Result ↓↓↓
+                ↓↓↓ YuNet Face Detection Result ↓↓↓
               </div>
-              <canvas ref={this.haarFaceImgRef} />
+              <canvas ref={this.faceImgRef} />
             </div>
           </div>
         )}

@@ -1,21 +1,12 @@
-import cvModule from "@techstark/opencv-js";
+import cvReadyPromise from "@techstark/opencv-js";
+
+let cvInstance = null;
 
 export async function getOpenCv() {
-  let cv;
-  if (cvModule instanceof Promise) {
-    cv = await cvModule;
-  } else {
-    if (cvModule.Mat) {
-      // already initialized
-      cv = cvModule;
-    } else {
-      await new Promise((resolve) => {
-        cvModule.onRuntimeInitialized = () => resolve();
-      });
-      cv = cvModule;
-    }
+  if (!cvInstance) {
+    cvInstance = await cvReadyPromise;
   }
-  return { cv };
+  return { cv: cvInstance };
 }
 
 export function translateException(cv, err) {
